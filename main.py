@@ -46,7 +46,7 @@ for i in range(0, length):
 my_file = open("stopword.txt", "r")
 stop_word = my_file.read().splitlines()
 from sklearn.feature_extraction.text import CountVectorizer
-vectorizer = CountVectorizer(max_features=3000, min_df=10, max_df=0.7, stop_words=stop_word)
+vectorizer = CountVectorizer(max_features=5000, min_df=10, max_df=0.7, stop_words=stop_word)
 content = vectorizer.fit_transform(documents).toarray()
 
 # Finding TFIDF
@@ -59,7 +59,7 @@ from sklearn.model_selection import train_test_split
 x_train, x_test, y_train, y_test = train_test_split(content, label, test_size=0.2, random_state=0)
 
 # Training Text Classification Model 
-classifier = RandomForestClassifier(n_estimators=1000, random_state=0)
+classifier = RandomForestClassifier(n_estimators=500, random_state=0)
 classifier.fit(x_train, y_train)
 
 # Predicting Topic
@@ -78,7 +78,7 @@ test_list = testcontent.splitlines()
 test_file.close()
 
 from sklearn.feature_extraction.text import TfidfVectorizer
-tfidfconvertertest = TfidfVectorizer(max_features=3000, min_df=10, max_df=0.7, stop_words=stop_word)
+tfidfconvertertest = TfidfVectorizer(max_features=5000, min_df=10, max_df=0.7, stop_words=stop_word)
 test_list = tfidfconvertertest.fit_transform(documents).toarray()
 
 label_predict = classifier.predict(test_list)
