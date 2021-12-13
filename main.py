@@ -76,6 +76,25 @@ test_file = open("topic_detection_test_unlabel.v1.0.txt", "r")
 testcontent = test_file.read()
 test_list = testcontent.splitlines()
 test_file.close()
+test_length = len(test_list)
+
+test_documents = []
+for i in range(0, test_length):
+    # Remove all the special characters
+    test_document = re.sub('\W+', ' ', test_list[i])
+    
+    # remove all single characters
+    test_document = re.sub(r'\s+[a-zA-Z]\s+', ' ', test_document)
+    
+    # Remove single characters from the start
+    test_document = re.sub(r'\^[a-zA-Z]\s+', ' ', test_document) 
+    
+    # Substituting multiple spaces with single space
+    test_document = re.sub(r'\s+', ' ', test_document, flags=re.I)
+
+    # Converting to Lowercase
+    test_document = test_document.lower()
+
 
 from sklearn.feature_extraction.text import TfidfVectorizer
 tfidfconvertertest = TfidfVectorizer(max_features=5000, min_df=10, max_df=0.7, stop_words=stop_word)
