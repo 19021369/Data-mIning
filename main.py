@@ -97,8 +97,8 @@ for i in range(0, test_length):
 
 
 from sklearn.feature_extraction.text import TfidfVectorizer
-tfidfconvertertest = TfidfVectorizer(max_features=5000, min_df=10, max_df=0.7, stop_words=stop_word)
-test_list = tfidfconvertertest.fit_transform(documents).toarray()
+tfidfconvertertest = TfidfVectorizer(max_features=2300, min_df=5, max_df=0.7, stop_words=stop_word)
+test_list = tfidfconvertertest.fit_transform(test_documents).toarray()
 
 label_predict = classifier.predict(test_list)
 
